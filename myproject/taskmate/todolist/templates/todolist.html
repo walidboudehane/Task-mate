@@ -17,13 +17,10 @@
   
     {% endfor %}
 {% endif %}
-<form method="POST">
+<form method="POST" class="row">
     {% csrf_token %}
-    <div class="form-group">
-      <input type="text" class="form-control" name="task" placeholder="new task ?">
-    </div>
-</br>
-    <button type="submit" class="btn btn-primary">add task</button>
+    <input type="text" class="form-control col-lg-6" name="task" placeholder="new task ?">
+    <button type="submit" class="btn btn-primary col-lg-2">add task</button>
   </form>
 </br>
     <table class="table table-bordered">
@@ -31,8 +28,9 @@
           <tr>
             <th scope="col">Task</th>
             <th scope="col">Done</th>
-            <th scope="col">Delete</th>
             <th scope="col">Edit</th>
+            <th scope="col">Delete</th>
+            
           </tr>
         </thead>
         <tbody>
@@ -41,16 +39,18 @@
                 {% if obj.done %}
                     <tr class="table-success">
                         <td>{{obj.task}}</td>
-                        <td>Completed</td>
-                        <td>Delete</td>
-                        <td>Edit</td>
+                        <td><a href="{% url 'pending_task' obj.id %}">Mark this pending</a></td>
+                        <td><a href="{% url 'edit_task' obj.id %}">Edit</a></td>
+                        <td><a href="{% url 'delete_task' obj.id %}">Delete</a></td>
+                        
                     </tr>
                 {% else %}
                     <tr>
                         <td>{{obj.task}}</td>
-                        <td>Not completed</td>
-                        <td>Delete</td>
-                        <td>Edit</td>
+                        <td><a href="{% url 'complete_task' obj.id %}">Mark this completed</a></td>
+                        <td><a href="{% url 'edit_task' obj.id %}">Edit</a></td>
+                        <td><a href="{% url 'delete_task' obj.id %}">Delete</a></td>
+                        
                     </tr>
                 {% endif %}
             {% endfor %}
