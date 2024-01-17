@@ -47,10 +47,15 @@ def pending_task(request,task_id):
     task.done=False
     task.save()
     return redirect('todolist')
-    
+
+def index(request):
+    context = {'welcome_index':'welcome to index !'}
+    return render(request,'index.html',context)
+ 
 def contact(request):
     context = {'welcome_contact':'welcome to contact !'}
     return render(request,'contact.html',context)
+
 def about(request):
     context = {'welcome_about':'welcome to about !'}
     return render(request,'about.html',context)
